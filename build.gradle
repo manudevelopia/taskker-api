@@ -1,7 +1,7 @@
 plugins {
-    id 'com.github.johnrengelman.shadow' version '6.1.0'
     id 'groovy'
     id 'application'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
 compileGroovy.groovyOptions.configurationScript = file('gradle/config/groovyc.groovy')
