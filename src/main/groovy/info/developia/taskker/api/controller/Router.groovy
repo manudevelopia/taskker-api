@@ -1,6 +1,6 @@
-package developia.info.taskker.controller
+package info.developia.taskker.api.controller
 
-import developia.info.taskker.exception.NotFoundException
+import info.developia.taskker.api.exception.NotFoundException
 
 import static spark.Spark.*
 

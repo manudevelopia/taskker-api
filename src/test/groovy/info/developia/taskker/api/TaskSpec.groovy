@@ -1,7 +1,7 @@
-package developia.info.taskker
+package info.developia.taskker.api
 
-import developia.info.taskker.controller.Router
-import developia.info.taskker.model.Task
+import info.developia.taskker.api.controller.Router
+import info.developia.taskker.api.model.Task
 import kong.unirest.GenericType
 import kong.unirest.HttpResponse
 import kong.unirest.Unirest

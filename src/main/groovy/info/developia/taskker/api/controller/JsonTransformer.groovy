@@ -1,4 +1,4 @@
-package developia.info.taskker.controller
+package info.developia.taskker.api.controller
 
 import com.google.gson.Gson
 import spark.ResponseTransformer

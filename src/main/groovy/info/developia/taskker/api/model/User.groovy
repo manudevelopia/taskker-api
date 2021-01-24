@@ -1,4 +1,4 @@
-package developia.info.taskker.model
+package info.developia.taskker.api.model
 
 class User {
     String name

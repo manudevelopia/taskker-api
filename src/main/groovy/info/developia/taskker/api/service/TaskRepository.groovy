@@ -1,6 +1,6 @@
-package developia.info.taskker.service
+package info.developia.taskker.api.service
 
-import developia.info.taskker.model.Task
+import info.developia.taskker.api.model.Task
 
 class TaskRepository {
     private final List<Task> tasks = [

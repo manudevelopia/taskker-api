@@ -1,7 +1,7 @@
-package developia.info.taskker.service
+package info.developia.taskker.api.service
 
-import developia.info.taskker.exception.NotFoundException
-import developia.info.taskker.model.Task
+import info.developia.taskker.api.exception.NotFoundException
+import info.developia.taskker.api.model.Task
 
 class TaskService {
     private final TaskRepository taskRepository = new TaskRepository()

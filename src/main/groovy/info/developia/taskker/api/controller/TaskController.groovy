@@ -1,7 +1,7 @@
-package developia.info.taskker.controller
+package info.developia.taskker.api.controller
 
-import developia.info.taskker.model.Task
-import developia.info.taskker.service.TaskService
+import info.developia.taskker.api.model.Task
+import info.developia.taskker.api.service.TaskService
 import spark.Request
 
 class TaskController {

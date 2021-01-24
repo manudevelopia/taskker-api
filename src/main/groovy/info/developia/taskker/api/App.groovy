@@ -1,6 +1,6 @@
-package developia.info.taskker
+package info.developia.taskker.api
 
-import developia.info.taskker.controller.Router
+import info.developia.taskker.api.controller.Router
 
 import static spark.Spark.port
 

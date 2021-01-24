@@ -1,5 +1,6 @@
 plugins {
     id 'groovy'
+    id 'application'
     id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
@@ -19,4 +20,8 @@ dependencies {
     testImplementation 'com.konghq:unirest-java:3.11.01'
 
     runtime 'org.slf4j:slf4j-simple:1.7.21'
+}
+
+application {
+    mainClassName = 'info.developia.taskker.api.App'
 }
