@@ -26,9 +26,9 @@ class Repository<T> {
     SqlSessionFactory buildSqlSessionFactory() {
         DataSource dataSource = new PooledDataSource(
                 "org.postgresql.Driver",
-                System.getProperty("DATABASE_URL"),
-                System.getProperty("DATABASE_USERNAME"),
-                System.getProperty("DATABASE_PASSWORD"))
+                System.getenv().get("DATABASE_URL"),
+                System.getenv().get("DATABASE_USERNAME"),
+                System.getenv().get("DATABASE_PASSWORD"))
 
         Environment environment = new Environment("Development", new JdbcTransactionFactory(), dataSource)
         Configuration configuration = new Configuration(environment)
