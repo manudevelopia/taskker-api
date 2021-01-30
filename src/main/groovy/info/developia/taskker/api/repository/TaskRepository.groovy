@@ -3,7 +3,6 @@ package info.developia.taskker.api.repository
 import info.developia.taskker.api.exception.TaskServiceException
 import info.developia.taskker.api.mapper.TaskMapper
 import info.developia.taskker.api.model.Task
-import info.developia.taskker.api.repository.Repository
 import org.apache.ibatis.exceptions.PersistenceException
 
 class TaskRepository extends Repository<TaskMapper> {
@@ -16,9 +15,9 @@ class TaskRepository extends Repository<TaskMapper> {
         }
     }
 
-    Task getById(Long id) {
+    Optional<Task> getById(Long id) {
         try {
-            return repository({ TaskMapper tm -> tm.getById(id) })
+            return Optional.ofNullable(repository({ TaskMapper tm -> tm.getById(id) }))
         } catch (PersistenceException e) {
             throw new TaskServiceException(e.getMessage())
         }

@@ -1,10 +1,10 @@
 package info.developia.taskker.api.controller
 
-import info.developia.taskker.api.exception.NotFoundException
-
-import static spark.Spark.*
+import static spark.Spark.get
+import static spark.Spark.path
 
 class Router {
+
     static void init() {
         JsonTransformer transformer = new JsonTransformer()
         TaskController taskController = new TaskController()
@@ -15,7 +15,5 @@ class Router {
                 get("/:id", { req, res -> taskController.getById(req) }, transformer)
             })
         })
-
-        exception(NotFoundException, { exception, req, res -> res.status(404) })
     }
 }

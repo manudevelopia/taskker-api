@@ -1,5 +1,6 @@
 package info.developia.taskker.api
 
+import info.developia.taskker.api.controller.ExceptionController
 import info.developia.taskker.api.controller.Router
 
 import static spark.Spark.port
@@ -9,5 +10,6 @@ class App {
         Optional.of(System.getProperty("server.port", "8800"))
                 .ifPresent({ portNumber -> port(Integer.valueOf(portNumber)) })
         Router.init()
+        ExceptionController.init()
     }
 }
