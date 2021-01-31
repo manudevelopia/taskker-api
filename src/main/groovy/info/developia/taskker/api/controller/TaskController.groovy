@@ -1,18 +1,18 @@
 package info.developia.taskker.api.controller
 
-import info.developia.taskker.api.model.Task
 import info.developia.taskker.api.service.TaskService
 import spark.Request
+import spark.Response
 
-class TaskController {
+class TaskController implements Controller {
     private TaskService taskService = new TaskService()
 
-    List<Task> getGetAll() {
-        return taskService.getGetAll()
+    String getAll(Response res) {
+        return buildResponse(res, 200, taskService.getGetAll())
     }
 
-    Task getById(Request req) {
+    String getById(Request req, Response res) {
         String id = req.params('id')
-        return taskService.getById(Long.valueOf(id))
+        return buildResponse(res, 200, taskService.getById(Long.valueOf(id)))
     }
 }

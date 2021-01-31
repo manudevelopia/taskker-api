@@ -1,6 +1,5 @@
 package info.developia.taskker.api
 
-import info.developia.taskker.api.controller.ExceptionController
 import info.developia.taskker.api.controller.Router
 
 import static spark.Spark.port
@@ -9,7 +8,6 @@ class App {
     static void main(String[] args) {
         config()
         Router.init()
-        ExceptionController.init()
     }
 
     private static config() {
