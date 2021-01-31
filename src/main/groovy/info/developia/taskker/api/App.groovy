@@ -7,9 +7,12 @@ import static spark.Spark.port
 
 class App {
     static void main(String[] args) {
-        Optional.of(System.getProperty("server.port", "8800"))
-                .ifPresent({ portNumber -> port(Integer.valueOf(portNumber)) })
+        config()
         Router.init()
         ExceptionController.init()
+    }
+
+    private static config() {
+        port(Integer.valueOf(System.getProperty("server.port", "8800")))
     }
 }
