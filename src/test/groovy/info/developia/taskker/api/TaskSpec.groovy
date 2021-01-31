@@ -7,9 +7,12 @@ import kong.unirest.HttpResponse
 import kong.unirest.Unirest
 import spock.lang.Specification
 
+import static spark.Spark.port
+
 class TaskSpec extends Specification {
 
     def setupSpec() {
+        port(4567)
         Router.init()
     }
 
