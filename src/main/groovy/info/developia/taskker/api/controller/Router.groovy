@@ -4,14 +4,17 @@ import info.developia.taskker.api.exception.NotFoundException
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-import static spark.Spark.*
+import static info.developia.taskker.api.controller.ExceptionController.notFoundException
+import static spark.Spark.before
+import static spark.Spark.exception
+import static spark.Spark.get
+import static spark.Spark.path
 
 class Router {
     private final static Logger LOG = LoggerFactory.getLogger(Router)
 
     static void init() {
         final TaskController taskController = new TaskController()
-        final ExceptionController exceptionController = new ExceptionController()
 
         before("/*", { req, res -> LOG.info("Received api call") });
 
@@ -22,6 +25,6 @@ class Router {
             })
         })
 
-        exception(NotFoundException, { e, req, res -> exceptionController.notFoundException(res, e) })
+        exception(NotFoundException, { e, req, res -> notFoundException(res, e) })
     }
 }
