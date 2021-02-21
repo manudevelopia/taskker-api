@@ -8,10 +8,10 @@ import spark.Response
 class ExceptionController implements Controller {
     private static final Logger LOG = LoggerFactory.getLogger(Router)
 
-    static void notFoundException(Response res, NotFoundException e) {
+    static String notFoundException(Response res, NotFoundException e) {
         LOG.error(e.getMessage())
         ErrorResponse errorResponse = new ErrorResponse(status: 404, message: e.getMessage())
-        buildResponse(res, errorResponse.getStatus(), errorResponse)
+        return buildResponseError(res, errorResponse)
     }
 
     static class ErrorResponse {

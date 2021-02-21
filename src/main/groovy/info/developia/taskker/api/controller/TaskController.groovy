@@ -8,11 +8,11 @@ class TaskController implements Controller {
     private TaskService taskService = new TaskService()
 
     String getAll(Response res) {
-        return buildResponse(res, 200, taskService.getGetAll())
+        return buildResponseError(res, 200, taskService.getGetAll())
     }
 
     String getById(Request req, Response res) {
         String id = req.params('id')
-        return buildResponse(res, 200, taskService.getById(Long.valueOf(id)))
+        return buildResponseError(res, 200, taskService.getById(Long.valueOf(id)))
     }
 }
