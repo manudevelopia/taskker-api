@@ -15,4 +15,8 @@ class TaskService {
         return taskRepository.getById(id)
                 .orElseThrow({ -> new NotFoundException("No Task can be found with id $id") })
     }
+
+    void create(Task task) {
+        taskRepository.create(task)
+    }
 }

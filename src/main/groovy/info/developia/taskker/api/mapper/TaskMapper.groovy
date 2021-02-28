@@ -1,6 +1,7 @@
 package info.developia.taskker.api.mapper
 
 import info.developia.taskker.api.model.Task
+import org.apache.ibatis.annotations.Insert
 import org.apache.ibatis.annotations.Select
 
 interface TaskMapper {
@@ -17,4 +18,10 @@ interface TaskMapper {
             from tasks where t_id = #{id}
     ''')
     Task getById(Long id)
+
+    @Insert('''
+            insert into tasks(t_title, t_description) 
+            values (#{title},#{description})
+    ''')
+    void create(Task task)
 }

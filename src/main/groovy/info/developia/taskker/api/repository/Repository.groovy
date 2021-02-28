@@ -32,7 +32,7 @@ class Repository<T> {
 
         Environment environment = new Environment("Development", new JdbcTransactionFactory(), dataSource)
         Configuration configuration = new Configuration(environment)
-        configuration.addMappers("info.developia.taskker.api.mapper")
+        configuration.addMappers('info.developia.taskker.api.mapper')
 
         return new SqlSessionFactoryBuilder().build(configuration)
     }

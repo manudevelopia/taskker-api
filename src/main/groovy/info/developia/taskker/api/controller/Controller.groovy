@@ -4,9 +4,15 @@ import com.google.gson.Gson
 import spark.Response
 
 trait Controller {
-    private static Gson gson = new Gson()
+    static Gson gson = new Gson()
 
-    static String buildResponseError(Response res, int status, Object obj) {
+    static String buildResponse(Response res, int status){
+        res.status(status)
+        res.type('application/json')
+        return ''
+    }
+
+    static String buildResponse(Response res, int status, Object obj) {
         res.status(status)
         res.type('application/json')
         return gson.toJson(obj)
