@@ -4,6 +4,8 @@ import info.developia.taskker.api.exception.NotFoundException
 import info.developia.taskker.api.model.Task
 import info.developia.taskker.api.repository.TaskRepository
 
+import java.time.LocalDateTime
+
 class TaskService {
     private final TaskRepository taskRepository = new TaskRepository()
 
@@ -17,6 +19,8 @@ class TaskService {
     }
 
     void create(Task task) {
+        task.setTid(UUID.randomUUID().toString().replaceAll('-',''))
+        task.setCreatedOn(LocalDateTime.now())
         taskRepository.create(task)
     }
 }

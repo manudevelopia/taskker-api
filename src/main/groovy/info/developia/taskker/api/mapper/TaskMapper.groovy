@@ -8,7 +8,7 @@ interface TaskMapper {
     @Select('''
         select t_title       title,
                t_description description
-               from tasks
+               from tasks∑
                ''')
     List<Task> getAll()
 
@@ -20,8 +20,8 @@ interface TaskMapper {
     Task getById(Long id)
 
     @Insert('''
-            insert into tasks(t_title, t_description) 
-            values (#{title},#{description})
+            insert into tasks(t_title, t_description, t_created_on) 
+            values (#{title},#{description}, #{createdOn})
     ''')
     void create(Task task)
 }

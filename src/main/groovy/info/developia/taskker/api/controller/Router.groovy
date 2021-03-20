@@ -25,7 +25,7 @@ class Router {
             path("/tasks", { ->
                 get("/all", { req, res -> taskController.getAll(res) })
                 get("/:id", { req, res -> taskController.getById(req, res) })
-                post("/", { req, res -> taskController.create(req, res) })
+                post("", { req, res -> taskController.create(req, res) })
             })
         })
 
