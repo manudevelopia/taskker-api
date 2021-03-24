@@ -6,22 +6,22 @@ import org.apache.ibatis.annotations.Select
 
 interface TaskMapper {
     @Select('''
-        select t_title       title,
-               t_description description
-               from tasks
-               ''')
+       select t_title title,
+       t_description description
+       from tasks           
+    ''')
     List<Task> getAll()
 
     @Select('''
-            select t_title title, 
-            t_description description 
-            from tasks where t_id = #{id}
+        select t_title title, 
+        t_description description 
+        from tasks where t_id = #{id}
     ''')
     Task getById(Long id)
 
     @Insert('''
-            insert into tasks(t_title, t_description, t_created_on) 
-            values (#{title},#{description}, #{createdOn})
+        insert into tasks(t_tid, t_title, t_description, t_created_on) 
+        values (#{tid}, #{title}, #{description}, #{createdOn})
     ''')
     void create(Task task)
 }
