@@ -27,7 +27,7 @@ trait Controller {
         res.body(gson.toJson(errorResponse))
     }
 
-    Task getTask(String json) {
+    static Task getTask(String json) {
         try {
             return gson.fromJson(json, Task)
         } catch (JsonSyntaxException ignored) {
