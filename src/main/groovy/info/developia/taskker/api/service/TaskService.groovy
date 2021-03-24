@@ -19,8 +19,22 @@ class TaskService {
     }
 
     void create(Task task) {
-        task.setTid(UUID.randomUUID().toString().replaceAll('-',''))
+        task.setTid(UUID.randomUUID().toString().replaceAll('-', ''))
         task.setCreatedOn(LocalDateTime.now())
         taskRepository.create(task)
+    }
+
+    static boolean isValidNew(Task task) {
+        return isNullOrBlank(task.getTid()) &&
+                !isNullOrBlank(task.getTitle())
+    }
+
+    static boolean isValid(Task task) {
+        return !isNullOrBlank(task.getTid()) &&
+                !isNullOrBlank(task.getTitle())
+    }
+
+    private static boolean isNullOrBlank(String value) {
+        value == null || value.isBlank()
     }
 }

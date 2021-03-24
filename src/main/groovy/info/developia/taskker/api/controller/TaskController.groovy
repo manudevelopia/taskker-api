@@ -1,11 +1,12 @@
 package info.developia.taskker.api.controller
 
-import com.google.gson.JsonSyntaxException
 import info.developia.taskker.api.exception.BadRequestException
 import info.developia.taskker.api.model.Task
 import info.developia.taskker.api.service.TaskService
 import spark.Request
 import spark.Response
+
+import static info.developia.taskker.api.service.TaskService.isValidNew
 
 class TaskController implements Controller {
     private TaskService taskService = new TaskService()
@@ -20,12 +21,9 @@ class TaskController implements Controller {
     }
 
     String create(Request req, Response res) {
-        Task newTask
-        try {
-            newTask = gson.fromJson(req.body(), Task)
-        } catch (JsonSyntaxException e){
-            throw new BadRequestException('Request does not contains a valid task json')
-        }
+        Task newTask = getTask(req.body())
+        if (!isValidNew(newTask))
+            throw new BadRequestException('Task does not contains minimal data to be created')
         taskService.create(newTask)
         return buildResponse(res, 201)
     }
