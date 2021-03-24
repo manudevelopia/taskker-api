@@ -17,6 +17,8 @@ class TaskController implements Controller {
 
     String getById(Request req, Response res) {
         String id = req.params('id')
+        if (!isPositiveLong(id))
+            throw new BadRequestException('Provided id is not valid')
         return buildResponse(res, 200, taskService.getById(Long.valueOf(id)))
     }
 
