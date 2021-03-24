@@ -20,7 +20,6 @@ class TaskService {
 
     void create(Task task) {
         task.setTid(UUID.randomUUID().toString().replaceAll('-', ''))
-        task.setCreatedOn(LocalDateTime.now())
         taskRepository.create(task)
     }
 

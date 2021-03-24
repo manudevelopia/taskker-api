@@ -21,7 +21,7 @@ interface TaskMapper {
 
     @Insert('''
         insert into tasks(t_tid, t_title, t_description, t_created_on) 
-        values (#{tid}, #{title}, #{description}, #{createdOn})
+        values (#{tid}, #{title}, #{description}, now())
     ''')
     void create(Task task)
 }
