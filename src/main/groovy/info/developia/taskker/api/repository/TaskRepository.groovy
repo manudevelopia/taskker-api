@@ -30,4 +30,12 @@ class TaskRepository extends Repository<TaskMapper> {
             throw new TaskServiceException(e.getMessage())
         }
     }
+
+    void update(Task task) {
+        try {
+            repository({ TaskMapper tm -> tm.update(task) })
+        } catch (PersistenceException e){
+            throw new TaskServiceException(e.getMessage())
+        }
+    }
 }

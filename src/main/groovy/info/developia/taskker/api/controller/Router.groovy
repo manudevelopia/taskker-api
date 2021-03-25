@@ -12,6 +12,7 @@ import static spark.Spark.exception
 import static spark.Spark.get
 import static spark.Spark.path
 import static spark.Spark.post
+import static spark.Spark.put
 
 class Router {
     private final static Logger LOG = LoggerFactory.getLogger(Router)
@@ -26,6 +27,7 @@ class Router {
                 get("/all", { req, res -> taskController.getAll(res) })
                 get("/:id", { req, res -> taskController.getById(req, res) })
                 post("", { req, res -> taskController.create(req, res) })
+                put("", { req, res -> taskController.update(req, res) })
             })
         })
 

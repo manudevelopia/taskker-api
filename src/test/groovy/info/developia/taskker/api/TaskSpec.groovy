@@ -40,4 +40,13 @@ class TaskSpec extends Specification {
         then:
         response.getStatus() == 201
     }
+
+    def "update an existing task"() {
+        given:
+        String json = '{ "tid": "8ac6e3a1d96c42a881c25e5e07b9383b", "title" : "update task 10 title", "description" : "update task 10 description" }'
+        when:
+        HttpResponse response = Unirest.put("$baseUrl/api/tasks").body(json).asEmpty()
+        then:
+        response.getStatus() == 200
+    }
 }

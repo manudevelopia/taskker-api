@@ -6,6 +6,7 @@ import info.developia.taskker.api.service.TaskService
 import spark.Request
 import spark.Response
 
+import static info.developia.taskker.api.service.TaskService.isValid
 import static info.developia.taskker.api.service.TaskService.isValidNew
 
 class TaskController implements Controller {
@@ -28,5 +29,13 @@ class TaskController implements Controller {
             throw new BadRequestException('Task does not contains minimal data to be created')
         taskService.create(newTask)
         return buildResponse(res, 201)
+    }
+
+    String update(Request req, Response res) {
+        Task task = getTask(req.body())
+        if (!isValid(task))
+            throw new BadRequestException('Task does not contains minimal data to be created')
+        taskService.update(task)
+        return buildResponse(res, 200)
     }
 }
