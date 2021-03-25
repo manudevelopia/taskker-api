@@ -1,6 +1,6 @@
 package info.developia.taskker.api.repository
 
-
+import io.github.cdimascio.dotenv.Dotenv
 import org.apache.ibatis.datasource.pooled.PooledDataSource
 import org.apache.ibatis.exceptions.PersistenceException
 import org.apache.ibatis.mapping.Environment
@@ -24,15 +24,16 @@ class Repository<T> {
     }
 
     static SqlSessionFactory buildSqlSessionFactory() {
+        Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load()
         DataSource dataSource = new PooledDataSource(
                 "org.postgresql.Driver",
-                System.getenv().get("DATABASE_URL_CONN"),
-                System.getenv().get("DATABASE_USERNAME"),
-                System.getenv().get("DATABASE_PASSWORD"))
+                dotenv.get("DATABASE_URL_CONN"),
+                dotenv.get("DATABASE_USERNAME"),
+                dotenv.get("DATABASE_PASSWORD"))
 
         Environment environment = new Environment("Development", new JdbcTransactionFactory(), dataSource)
         Configuration configuration = new Configuration(environment)
-        configuration.addMappers("info.developia.taskker.api.mapper")
+        configuration.addMappers('info.developia.taskker.api.mapper')
 
         return new SqlSessionFactoryBuilder().build(configuration)
     }
