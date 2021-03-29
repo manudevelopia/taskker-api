@@ -10,6 +10,7 @@ import static info.developia.taskker.api.controller.ExceptionController.notFound
 import static spark.Spark.before
 import static spark.Spark.exception
 import static spark.Spark.get
+import static spark.Spark.patch
 import static spark.Spark.path
 import static spark.Spark.post
 import static spark.Spark.put
@@ -25,9 +26,10 @@ class Router {
         path("/api", { ->
             path("/tasks", { ->
                 get("/all", { req, res -> taskController.getAll(res) })
-                get("/:id", { req, res -> taskController.getById(req, res) })
+                get("/:tid", { req, res -> taskController.getByTid(req, res) })
                 post("", { req, res -> taskController.create(req, res) })
                 put("", { req, res -> taskController.update(req, res) })
+                patch("/:tid", { req, res -> taskController.markDoneAs(req, res) })
             })
         })
 

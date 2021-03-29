@@ -6,6 +6,7 @@ class Task {
     String tid
     String title
     String description
+    boolean done
     LocalDateTime createdOn
     List<Task> subTasks
     User user

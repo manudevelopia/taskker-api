@@ -34,12 +34,4 @@ trait Controller {
             throw new BadRequestException('Request does not contains a valid task json')
         }
     }
-
-    static boolean isPositiveLong(String value){
-        try {
-            return Long.valueOf(value) > 0
-        } catch (NumberFormatException ignored){
-            return false
-        }
-    }
 }

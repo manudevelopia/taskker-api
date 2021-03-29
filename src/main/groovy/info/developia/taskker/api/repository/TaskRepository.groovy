@@ -15,9 +15,9 @@ class TaskRepository extends Repository<TaskMapper> {
         }
     }
 
-    Optional<Task> getById(Long id) {
+    Optional<Task> getById(String tid) {
         try {
-            return Optional.ofNullable(repository({ TaskMapper tm -> tm.getById(id) }))
+            return Optional.ofNullable(repository({ TaskMapper tm -> tm.getById(tid) }))
         } catch (PersistenceException e) {
             throw new TaskServiceException(e.getMessage())
         }
@@ -34,6 +34,14 @@ class TaskRepository extends Repository<TaskMapper> {
     void update(Task task) {
         try {
             repository({ TaskMapper tm -> tm.update(task) })
+        } catch (PersistenceException e){
+            throw new TaskServiceException(e.getMessage())
+        }
+    }
+
+    void markDoneAs(Task task){
+        try {
+            repository({ TaskMapper tm -> tm.markDoneAs(task) })
         } catch (PersistenceException e){
             throw new TaskServiceException(e.getMessage())
         }

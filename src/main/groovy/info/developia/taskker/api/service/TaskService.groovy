@@ -4,6 +4,8 @@ import info.developia.taskker.api.exception.NotFoundException
 import info.developia.taskker.api.model.Task
 import info.developia.taskker.api.repository.TaskRepository
 
+import static info.developia.taskker.api.util.Common.isNullOrBlank
+
 class TaskService {
     private final TaskRepository taskRepository = new TaskRepository()
 
@@ -11,9 +13,9 @@ class TaskService {
         return taskRepository.getAll()
     }
 
-    Task getById(Long id) {
-        return taskRepository.getById(id)
-                .orElseThrow({ -> new NotFoundException("No Task can be found with id $id") })
+    Task getByTid(String tid) {
+        return taskRepository.getById(tid)
+                .orElseThrow({ -> new NotFoundException("No Task can be found with tid $tid") })
     }
 
     void create(Task task) {
@@ -35,7 +37,9 @@ class TaskService {
                 !isNullOrBlank(task.getTitle())
     }
 
-    private static boolean isNullOrBlank(String value) {
-        value == null || value.isBlank()
+    void markDoneAs(String tid) {
+        Task task = getByTid(tid)
+        task.done = !task.done
+        taskRepository.markDoneAs(task)
     }
 }

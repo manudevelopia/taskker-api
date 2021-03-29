@@ -26,7 +26,6 @@ class TaskSpec extends Specification {
         String allTasksUrl = "$baseUrl/api/tasks/all"
         when:
         HttpResponse<List<Task>> response = Unirest.get(allTasksUrl).asObject(new GenericType<List<Task>>() {})
-
         then:
         response.status == 200
         !response.getBody().isEmpty()
@@ -48,5 +47,14 @@ class TaskSpec extends Specification {
         HttpResponse response = Unirest.put("$baseUrl/api/tasks").body(json).asEmpty()
         then:
         response.getStatus() == 200
+    }
+
+    def "mark as done/undone an existing task"() {
+        given:
+        String tid = '8ac6e3a1d96c42a881c25e5e07b9383b'
+        when:
+        HttpResponse response = Unirest.patch("$baseUrl/api/tasks/$tid").asEmpty()
+        then:
+        response.getStatus() == 204
     }
 }

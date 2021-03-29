@@ -8,6 +8,7 @@ import spark.Response
 
 import static info.developia.taskker.api.service.TaskService.isValid
 import static info.developia.taskker.api.service.TaskService.isValidNew
+import static info.developia.taskker.api.util.Common.isNullOrBlank
 
 class TaskController implements Controller {
     private TaskService taskService = new TaskService()
@@ -16,11 +17,11 @@ class TaskController implements Controller {
         return buildResponse(res, 200, taskService.getGetAll())
     }
 
-    String getById(Request req, Response res) {
-        String id = req.params('id')
-        if (!isPositiveLong(id))
-            throw new BadRequestException('Provided id is not valid')
-        return buildResponse(res, 200, taskService.getById(Long.valueOf(id)))
+    String getByTid(Request req, Response res) {
+        String tid = req.params('tid')
+        if (isNullOrBlank(tid))
+            throw new BadRequestException('Provided tid is not valid')
+        return buildResponse(res, 200, taskService.getByTid(tid))
     }
 
     String create(Request req, Response res) {
@@ -37,5 +38,13 @@ class TaskController implements Controller {
             throw new BadRequestException('Task does not contains minimal data to be created')
         taskService.update(task)
         return buildResponse(res, 200)
+    }
+
+    String markDoneAs(Request req, Response res){
+        String tid = req.params('tid')
+        if (isNullOrBlank(tid))
+            throw new BadRequestException('Provided tid is not valid')
+        taskService.markDoneAs(tid)
+        return buildResponse(res, 204)
     }
 }
