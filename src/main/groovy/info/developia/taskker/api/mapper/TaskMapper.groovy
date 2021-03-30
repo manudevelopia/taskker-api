@@ -7,8 +7,9 @@ import org.apache.ibatis.annotations.Update
 
 interface TaskMapper {
     @Select('''
-       select t_title title,
-       t_description description
+       select t_tid tid,
+              t_title title,
+              t_description description
        from tasks           
     ''')
     List<Task> getAll()
