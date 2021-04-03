@@ -14,7 +14,7 @@ class Router {
 
     static void init() {
         final TaskController taskController = new TaskController()
-        CorsFilter.apply();
+        before(new CorsFilter())
 
         before("/*", { req, res -> LOG.info("Received api call") })
 

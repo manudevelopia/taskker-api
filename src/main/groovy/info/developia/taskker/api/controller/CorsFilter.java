@@ -1,23 +1,16 @@
 package info.developia.taskker.api.controller;
 
 import spark.Filter;
-import spark.Spark;
+import spark.Request;
+import spark.Response;
 
-import java.util.HashMap;
+public final class CorsFilter implements Filter {
 
-public final class CorsFilter {
-
-    private static final HashMap<String, String> corsHeaders = new HashMap<String, String>();
-
-    static {
-        corsHeaders.put("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-        corsHeaders.put("Access-Control-Allow-Origin", "*");
-        corsHeaders.put("Access-Control-Allow-Headers", "Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,");
-        corsHeaders.put("Access-Control-Allow-Credentials", "true");
-    }
-
-    public static void apply() {
-        Filter filter = (request, response) -> corsHeaders.forEach(response::header);
-        Spark.after(filter);
+    @Override
+    public void handle(Request request, Response response) throws Exception {
+        response.header("Access-Control-Allow-Origin", "*");
+        response.header("Access-Control-Request-Method", "GET,PUT,POST,DELETE,OPTIONS");
+        response.header("Access-Control-Allow-Headers", "Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin");
+        response.header("Access-Control-Allow-Credentials", "true");
     }
 }
