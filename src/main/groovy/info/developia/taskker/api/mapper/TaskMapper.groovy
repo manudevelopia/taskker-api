@@ -9,8 +9,10 @@ interface TaskMapper {
     @Select('''
        select t_tid tid,
               t_title title,
-              t_description description
-       from tasks           
+              t_description description,
+              t_done done
+       from tasks
+       order by t_created_on desc
     ''')
     List<Task> getAll()
 

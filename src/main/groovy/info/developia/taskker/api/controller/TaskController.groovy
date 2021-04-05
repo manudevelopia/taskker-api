@@ -21,7 +21,7 @@ class TaskController implements Controller {
         String tid = req.params('tid')
         if (isNullOrBlank(tid))
             throw new BadRequestException('Provided tid is not valid')
-        return buildResponse(res, 200, taskService.getByTid(tid))
+        return buildResponse(res, 200, )
     }
 
     String create(Request req, Response res) {
