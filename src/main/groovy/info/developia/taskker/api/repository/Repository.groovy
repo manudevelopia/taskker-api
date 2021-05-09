@@ -1,41 +1,17 @@
 package info.developia.taskker.api.repository
 
-import io.github.cdimascio.dotenv.Dotenv
-import org.apache.ibatis.datasource.pooled.PooledDataSource
-import org.apache.ibatis.exceptions.PersistenceException
-import org.apache.ibatis.mapping.Environment
-import org.apache.ibatis.session.Configuration
 import org.apache.ibatis.session.SqlSession
 import org.apache.ibatis.session.SqlSessionFactory
-import org.apache.ibatis.session.SqlSessionFactoryBuilder
-import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory
 
-import javax.sql.DataSource
 import java.lang.reflect.ParameterizedType
 import java.util.function.Function
 
-class Repository<T> {
+abstract class Repository<T> {
+    private final Class<T> typeParameterClass = getTypeParameterClass()
     private static SqlSessionFactory sqlSessionFactory
-    private final Class<T> typeParameterClass
 
     Repository() {
-        sqlSessionFactory = buildSqlSessionFactory()
-        typeParameterClass = getTypeParameterClass()
-    }
-
-    static SqlSessionFactory buildSqlSessionFactory() {
-        Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load()
-        DataSource dataSource = new PooledDataSource(
-                "org.postgresql.Driver",
-                dotenv.get("DATABASE_URL_CONN"),
-                dotenv.get("DATABASE_USERNAME"),
-                dotenv.get("DATABASE_PASSWORD"))
-
-        Environment environment = new Environment("Development", new JdbcTransactionFactory(), dataSource)
-        Configuration configuration = new Configuration(environment)
-        configuration.addMappers('info.developia.taskker.api.mapper')
-
-        return new SqlSessionFactoryBuilder().build(configuration)
+        sqlSessionFactory = RepositoryManager.getSession(typeParameterClass.getPackageName())
     }
 
     @SuppressWarnings("unchecked")

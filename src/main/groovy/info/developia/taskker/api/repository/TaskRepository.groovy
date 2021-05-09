@@ -3,7 +3,6 @@ package info.developia.taskker.api.repository
 import info.developia.taskker.api.exception.TaskServiceException
 import info.developia.taskker.api.mapper.TaskMapper
 import info.developia.taskker.api.model.Task
-import org.apache.ibatis.exceptions.PersistenceException
 
 class TaskRepository extends Repository<TaskMapper> {
 
@@ -26,7 +25,7 @@ class TaskRepository extends Repository<TaskMapper> {
     void create(Task task) {
         try {
             repository({ TaskMapper tm -> tm.create(task) })
-        } catch (PersistenceException e){
+        } catch (PersistenceException e) {
             throw new TaskServiceException(e.getMessage())
         }
     }
@@ -34,15 +33,15 @@ class TaskRepository extends Repository<TaskMapper> {
     void update(Task task) {
         try {
             repository({ TaskMapper tm -> tm.update(task) })
-        } catch (PersistenceException e){
+        } catch (PersistenceException e) {
             throw new TaskServiceException(e.getMessage())
         }
     }
 
-    void markDoneAs(Task task){
+    void markDoneAs(Task task) {
         try {
             repository({ TaskMapper tm -> tm.markDoneAs(task) })
-        } catch (PersistenceException e){
+        } catch (PersistenceException e) {
             throw new TaskServiceException(e.getMessage())
         }
     }
