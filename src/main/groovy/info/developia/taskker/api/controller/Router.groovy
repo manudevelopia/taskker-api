@@ -15,20 +15,6 @@ class Router {
     static void init() {
         final TaskController taskController = new TaskController()
         before(new CorsFilter())
-        options("/*", { request, response ->
-
-            String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
-            if (accessControlRequestHeaders != null) {
-                response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
-            }
-
-            String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
-            if (accessControlRequestMethod != null) {
-                response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
-            }
-            return "OK";
-        })
-
         before("/*", { req, res -> LOG.info("Received api call") })
 
         path("/api", { ->
@@ -41,6 +27,7 @@ class Router {
             })
         })
 
+        after("/*", { req, res -> LOG.info("Resolved api call") })
         exception(NotFoundException, { e, req, res -> notFoundException(res, e) })
         exception(BadRequestException, { e, req, res -> badRequestException(res, e) })
     }
