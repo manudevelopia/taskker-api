@@ -8,7 +8,7 @@ import java.util.function.Function
 
 abstract class Repository<T> {
     private final Class<T> typeParameterClass = getTypeParameterClass()
-    private static SqlSessionFactory sqlSessionFactory
+    private final SqlSessionFactory sqlSessionFactory
 
     Repository() {
         sqlSessionFactory = RepositoryManager.getSession(typeParameterClass.getPackageName())

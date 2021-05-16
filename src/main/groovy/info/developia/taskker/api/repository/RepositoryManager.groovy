@@ -28,7 +28,7 @@ class RepositoryManager {
         return new SqlSessionFactoryBuilder().build(configuration)
     }
 
-    static getSession(String mappersPackageName) {
+    static SqlSessionFactory getSession(String mappersPackageName) {
         if (sqlSessionFactory == null) {
             sqlSessionFactory = buildSqlSessionFactory(mappersPackageName)
         }
